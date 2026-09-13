@@ -1,99 +1,53 @@
-import { useState } from "react";
+import { BrowserRouter, Routes, Route, Link } from "react-router-dom";
 import "./App.css";
 
-function App() {
-  const [student, setStudent] = useState({
-      name: "",
-          email: "",
-              course: "",
-                  age: ""
-                    });
+function Home() {
+  return (
+      <div>
+            <h2>Home Page</h2>
+                  <p>Welcome to the React SPA!</p>
+                      </div>
+                        );
+                        }
 
-                      const [error, setError] = useState("");
-                        const [submitted, setSubmitted] = useState(false);
+                        function About() {
+                          return (
+                              <div>
+                                    <h2>About Page</h2>
+                                          <p>This is the About page.</p>
+                                              </div>
+                                                );
+                                                }
 
-                          const handleChange = (e) => {
-                              setStudent({
-                                    ...student,
-                                          [e.target.name]: e.target.value
-                                              });
-                                                  setError("");
-                                                      setSubmitted(false);
-                                                        };
+                                                function Contact() {
+                                                  return (
+                                                      <div>
+                                                            <h2>Contact Page</h2>
+                                                                  <p>This is the Contact page.</p>
+                                                                      </div>
+                                                                        );
+                                                                        }
 
-                                                          const handleSubmit = (e) => {
-                                                              e.preventDefault();
+                                                                        function App() {
+                                                                          return (
+                                                                              <BrowserRouter>
+                                                                                    <div className="app">
+                                                                                            <h1>React SPA with Router</h1>
 
-                                                                  if (!student.name || !student.email || !student.course || !student.age) {
-                                                                        setError("Please fill all fields.");
-                                                                              return;
-                                                                                  }
+                                                                                                    <nav>
+                                                                                                              <Link to="/">Home</Link>
+                                                                                                                        <Link to="/about">About</Link>
+                                                                                                                                  <Link to="/contact">Contact</Link>
+                                                                                                                                          </nav>
 
-                                                                                      if (student.age < 18) {
-                                                                                            setError("Age must be 18 or above.");
-                                                                                                  return;
-                                                                                                      }
+                                                                                                                                                  <Routes>
+                                                                                                                                                            <Route path="/" element={<Home />} />
+                                                                                                                                                                      <Route path="/about" element={<About />} />
+                                                                                                                                                                                <Route path="/contact" element={<Contact />} />
+                                                                                                                                                                                        </Routes>
+                                                                                                                                                                                              </div>
+                                                                                                                                                                                                  </BrowserRouter>
+                                                                                                                                                                                                    );
+                                                                                                                                                                                                    }
 
-                                                                                                          setError("");
-                                                                                                              setSubmitted(true);
-                                                                                                                };
-
-                                                                                                                  return (
-                                                                                                                      <div className="container">
-                                                                                                                            <h1>Student Management System</h1>
-
-                                                                                                                                  <form onSubmit={handleSubmit}>
-                                                                                                                                          <input
-                                                                                                                                                    type="text"
-                                                                                                                                                              name="name"
-                                                                                                                                                                        placeholder="Enter student name"
-                                                                                                                                                                                  value={student.name}
-                                                                                                                                                                                            onChange={handleChange}
-                                                                                                                                                                                                    />
-
-                                                                                                                                                                                                            <input
-                                                                                                                                                                                                                      type="email"
-                                                                                                                                                                                                                                name="email"
-                                                                                                                                                                                                                                          placeholder="Enter email"
-                                                                                                                                                                                                                                                    value={student.email}
-                                                                                                                                                                                                                                                              onChange={handleChange}
-                                                                                                                                                                                                                                                                      />
-
-                                                                                                                                                                                                                                                                              <select
-                                                                                                                                                                                                                                                                                        name="course"
-                                                                                                                                                                                                                                                                                                  value={student.course}
-                                                                                                                                                                                                                                                                                                            onChange={handleChange}
-                                                                                                                                                                                                                                                                                                                    >
-                                                                                                                                                                                                                                                                                                                              <option value="">Select Course</option>
-                                                                                                                                                                                                                                                                                                                                        <option value="ReactJS">ReactJS</option>
-                                                                                                                                                                                                                                                                                                                                                  <option value="JavaScript">JavaScript</option>
-                                                                                                                                                                                                                                                                                                                                                            <option value="Python">Python</option>
-                                                                                                                                                                                                                                                                                                                                                                    </select>
-
-                                                                                                                                                                                                                                                                                                                                                                            <input
-                                                                                                                                                                                                                                                                                                                                                                                      type="number"
-                                                                                                                                                                                                                                                                                                                                                                                                name="age"
-                                                                                                                                                                                                                                                                                                                                                                                                          placeholder="Enter age"
-                                                                                                                                                                                                                                                                                                                                                                                                                    value={student.age}
-                                                                                                                                                                                                                                                                                                                                                                                                                              onChange={handleChange}
-                                                                                                                                                                                                                                                                                                                                                                                                                                      />
-
-                                                                                                                                                                                                                                                                                                                                                                                                                                              <button type="submit">Add Student</button>
-                                                                                                                                                                                                                                                                                                                                                                                                                                                    </form>
-
-                                                                                                                                                                                                                                                                                                                                                                                                                                                          {error && <p className="error">{error}</p>}
-
-                                                                                                                                                                                                                                                                                                                                                                                                                                                                {submitted && (
-                                                                                                                                                                                                                                                                                                                                                                                                                                                                        <div className="success">
-                                                                                                                                                                                                                                                                                                                                                                                                                                                                                  <h2>Student Added Successfully!</h2>
-                                                                                                                                                                                                                                                                                                                                                                                                                                                                                            <p>Name: {student.name}</p>
-                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                      <p>Email: {student.email}</p>
-                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                <p>Course: {student.course}</p>
-                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                          <p>Age: {student.age}</p>
-                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                  </div>
-                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                        )}
-                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                            </div>
-                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                              );
-                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                              }
-
-                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                              export default App;
+                                                                                                                                                                                                    export default App;
