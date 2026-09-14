@@ -9,13 +9,20 @@ app.use(express.json());
 app.get("/", (req, res) => {
     res.send("Employee API is running");
 })
-})
 
 // MongoDB Atlas connection
 mongoose
   .connect(process.env.MONGODB_URI)
-    .then(() => console.log("MongoDB Atlas connected"))
-      .catch((err) => console.log("MongoDB connection error:", err.message));
+   .then(() => {
+      console.log("MongoDB Atlas connected");
+
+      app.listen(PORT, () => {
+        console.log(`Employee API running on http://localhost:${PORT}`);
+                      });
+                        })
+      .catch((err) => {
+        console.log("MongoDB connection error:", err.message);
+                                });
 
      // Employee Schema
       const employeeSchema = new mongoose.Schema({
@@ -98,6 +105,3 @@ mongoose
                                                                                                                                                                                                     });
 
                                                                                                                                                                                                     // Start server
-                                                                                                                                                                                                    app.listen(PORT, () => {
-                                                                                                                                                                                                      console.log(`Employee API running on http://localhost:${PORT}`);
-                                                                                                                                                                                                      });
