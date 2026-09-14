@@ -1,0 +1,37 @@
+.app {
+      text-align: center;
+        font-family: Arial, sans-serif;
+          padding: 30px;
+          }
+
+          h1 {
+            margin-bottom: 30px;
+            }
+
+            .student {
+              margin: 15px auto;
+                padding: 15px;
+                  max-width: 350px;
+                    border: 1px solid #ccc;
+                      border-radius: 10px;
+                      }
+
+                      .student h2 {
+                        margin: 5px;
+                        }
+
+                        .student p {
+                          margin: 5px;
+                          }
+
+                          .counter {
+                            margin-top: 30px;
+                            }
+
+                            button {
+                              padding: 10px 20px;
+                                margin: 5px;
+                                  cursor: pointer;
+                                    border-radius: 5px;
+                                      border: 1px solid #999;
+ }
